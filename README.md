@@ -7,16 +7,16 @@
 ### Simple TLS
 The following command returns a self-signed key and certificate for a server:
 ```sh
-wget https://raw.githubusercontent.com/jewertow/openssl-cert-gen/tls.sh | SUBJECT="app.com" sh
+curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/tls.sh | SUBJECT="app.com" sh
 ```
 
 The same as above, but with SANs:
 ```sh
-wget https://raw.githubusercontent.com/jewertow/openssl-cert-gen/tls.sh | SUBJECT="app.com" SANS="www.app.com,api.app.com" sh
+curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/tls.sh | SUBJECT="app.com" SANS="www.app.com,api.app.com" sh
 ```
 
 ### mTLS
 The following command returns CA, client and server keys and certificates signed by a self-signed root certificate:
 ```sh
-wget https://raw.githubusercontent.com/jewertow/openssl-cert-gen/mtls.sh | CLIENT="client-app" SERVER="server-app" DOMAIN="com" sh
+curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/mtls.sh | CLIENT="client-app" SERVER="server-app" DOMAIN="com" sh
 ```
