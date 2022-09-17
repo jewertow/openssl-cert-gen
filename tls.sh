@@ -2,6 +2,19 @@
 
 set -e
 
+if [ $# -gt 0 ]
+then
+    for i in "$@"
+    do
+    case $i in
+        -s=*|--subject=*)
+        SUBJECT="${i#*=}"
+        shift
+        ;;
+    esac
+    done
+fi
+
 if [ -z "$SUBJECT" ]
 then
   echo "Environment variable SUBJECT must be exported or passed to the script."
