@@ -10,11 +10,6 @@ The following command returns a self-signed key and certificate for a server:
 curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/tls.sh | SUBJECT="app.com" sh
 ```
 
-The same as above, but with SANs:
-```sh
-curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/tls.sh | SUBJECT="app.com" SANS="www.app.com,api.app.com" sh
-```
-
 ### mTLS
 The following command returns CA, client and server keys and certificates signed by a self-signed root certificate:
 ```sh
