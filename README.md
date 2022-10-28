@@ -28,5 +28,4 @@ curl https://raw.githubusercontent.com/jewertow/openssl-cert-gen/master/tls.sh |
 ```
 
 ## TODO
-- use conf file to specify extensions, like CA:false, etc.
 - add support for settings SAN in certificates

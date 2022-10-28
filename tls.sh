@@ -58,7 +58,24 @@ function signCertificate {
 		-out "${SUBJECT}".crt \
 		-CAcreateserial \
 		-CA "${rootCertPath}" \
-		-CAkey "${rootKeyPath}"
+		-CAkey "${rootKeyPath}" \
+		-extensions v3_req \
+		-extfile cert.conf
+}
+
+function generateExtFile {
+	local subject=$1
+	cat > "cert.conf" <<EOF
+[req]
+req_extensions = v3_req
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage = clientAuth, serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS = $subject
+EOF
 }
 
 if [ "$ROOT_CERT" == "true" ]
@@ -73,6 +90,8 @@ else
 		-key "${SUBJECT}".key \
 		-out "${SUBJECT}".csr
 
+	generateExtFile $SUBJECT
+
 	if [[ -z "$ROOT_CERT_PATH" || -z "$ROOT_KEY_PATH" ]]
 	then
 		generateCA "/CN=ca.${SUBJECT}"
@@ -85,3 +104,4 @@ fi
 # cleanup temporary files
 rm -f "$SUBJECT".csr
 rm -f root-ca.srl
+rm -f cert.conf
